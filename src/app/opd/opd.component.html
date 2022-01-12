@@ -1,0 +1,261 @@
+<div class="container-fluid">
+  <div class="row d-flex justify-content-between">
+    <div class="col-md-4">
+      <form
+        [formGroup]="patientForm"
+        (ngSubmit)="onSubmit()"
+        (keydown.enter)="$event.preventDefault()"
+        #aForm
+      >
+        <div class="form-row">
+          <div class="form-group col-md-5">
+            <label for="first_name">FIRST NAME</label>
+            <input
+              type="text"
+              formControlName="first_name"
+              class="form-control"
+              id="first_name"
+            />
+          </div>
+          <div class="form-group col-md-5">
+            <label for="last_name">LAST NAME</label>
+            <input
+              type="text"
+              formControlName="last_name"
+              class="form-control"
+              id="last_name"
+            />
+          </div>
+          <div class="form-group col-md-2">
+            <label for="phone">Phone</label>
+            <input
+              type="number"
+              formControlName="mobile"
+              class="form-control"
+              id="phone"
+            />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-5">
+            <label for="relation">Relation</label>
+            <select
+              formControlName="relation"
+              class="custom-select"
+              id="relation"
+              style="width: 10em"
+            >
+              <option value="s/o">S/O</option>
+              <option value="w/o">W/O</option>
+              <option value="d/o">D/O</option>
+            </select>
+          </div>
+          <div class="form-group col-md-7">
+            <label for="relative_name">Relative Name</label>
+            <input
+              type="text"
+              formControlName="relative_name"
+              class="form-control"
+              id="relative_name"
+            />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label for="gst">Gender</label>
+            <select
+              formControlName="sex"
+              class="custom-select"
+              id="sex"
+              style="width: 13em"
+            >
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="form-group col-md-3">
+            <label for="age">Age</label>
+            <input
+              type="number"
+              formControlName="age"
+              class="form-control"
+              id="age"
+            />
+          </div>
+          <div class="form-group col-md-5">
+            <mat-form-field appearance="fill" style="width: 14em">
+              <mat-label>DOB</mat-label>
+              <input matInput [matDatepicker]="picker" />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6" style="margin-top: 9px">
+            <label for="gst" style="padding-right: 3px"
+              >Consulting Doctor</label
+            >
+            <select
+              formControlName="consultingDoc"
+              class="custom-select"
+              id="consultingDoc"
+              style="width: 8em; margin-top: 8px"
+              #fees
+              (change)="onSelectDoc(fees.value)"
+            >
+              <option *ngFor="let option of docList" value="{{ option.name }}">
+                {{ option.name }}
+              </option>
+            </select>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="ref_doc">Reffered By</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="ref_doc"
+              id="ref_doc"
+            />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-7">
+            <label for="address">Address</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="address"
+              id="address"
+            />
+          </div>
+          <div class="form-group col-md-5">
+            <label for="visiting_charge">Visiting Fees</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="visiting_charge"
+              id="visiting_charge"
+            />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-7">
+            <label for="village">Village</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="village"
+              id="village"
+            />
+          </div>
+          <div class="form-group col-md-5">
+            <label for="aadhar_card">Aadhar Number</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="aadhar_card"
+              id="aadhar_card"
+            />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col">
+            <button type="submit" class="btn btn-secondary">
+              SAVE & PRINT OPD
+            </button>
+            <!-- <button type="button" (click)="print()" class="btn btn-secondary">
+              PRINT
+            </button> -->
+          </div>
+          <div class="col">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              (click)="admitPatient()"
+            >
+              ADMIT PATIENT
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="col-md-2">
+      <div class="row">
+        <p class="lastVisit">Last Visit Date : {{ lastVisitDate }}</p>
+      </div>
+      <div class="row">
+        <p class="lastVisit">Days : {{ lastVisitDays }}</p>
+      </div>
+    </div>
+    <div class="col-md-5">
+      <div class="row">
+        <div class="form-group col-md-3">
+          <label for="patient_id">Patient Id</label>
+          <input
+            #patient_id
+            (input)="matchPatient(patient_id.value, 'registration_no')"
+            type="text"
+            class="form-control"
+            id="patient_id"
+          />
+        </div>
+        <div class="form-group col-md-3">
+          <label for="phone">Phone</label>
+          <input
+            #phone
+            (input)="matchPatient(phone.value, 'mobile')"
+            type="text"
+            class="form-control"
+            id="phone"
+          />
+        </div>
+        <div class="form-group col-md-3">
+          <label for="Aadhar Number">Aadhar Number</label>
+          <input
+            #aadhar
+            (input)="matchPatient(aadhar.value, 'aadhar_card')"
+            type="text"
+            class="form-control"
+            id="Aadhar Number"
+          />
+        </div>
+      </div>
+      <div class="row">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">First Name</th>
+              <th scope="col">Last Name</th>
+              <th scope="col">Phone</th>
+              <th scope="col">Registration ID</th>
+              <th scope="col">Select</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let option of patientList; index as i">
+              <th scope="row">{{ i + 1 }}</th>
+              <td>{{ option.first_name }}</td>
+              <td>{{ option.last_name }}</td>
+              <td>{{ option.mobile }}</td>
+              <td>{{ option.registration_no }}</td>
+              <td>
+                <input
+                  type="radio"
+                  [value]="i"
+                  [checked]="i == defaultSelected"
+                  (change)="patientSelect(i)"
+                />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

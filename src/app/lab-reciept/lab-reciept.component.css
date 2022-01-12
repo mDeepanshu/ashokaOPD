@@ -1,0 +1,29 @@
+.logotipo {
+  width: 6cm;
+  height: 2cm;
+  margin: 0.5cm;
+}
+.headMenu {
+  text-align: center;
+  line-height: 40%;
+  border-bottom: 1px solid black;
+}
+.total {
+  margin-top: 30px;
+}
+.label {
+  border-top: 1px solid black;
+}
+.signature {
+  margin-left: 45px;
+}
+.basicDetails {
+  border-bottom: 1px solid black;
+  margin-top: 8px;
+}
+.signatureCol {
+  margin-top: 18px;
+}
+.signatureRow {
+  border-bottom: 1px solid black;
+}

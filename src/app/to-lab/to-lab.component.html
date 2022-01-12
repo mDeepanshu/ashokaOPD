@@ -1,0 +1,117 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col">
+      <div class="row">
+        <div class="col">
+          <h4>LAB LIST</h4>
+        </div>
+        <div class="form-group col-md-4">
+          <label for="amt">AMOUNT</label>
+          <input
+            type="number"
+            [(ngModel)]="amount"
+            class="form-control"
+            id="amt"
+          />
+        </div>
+      </div>
+      <mat-accordion>
+        <mat-expansion-panel hideToggle *ngFor="let shoe of labList">
+          <mat-expansion-panel-header>
+            <mat-panel-title>{{ shoe.lab_name }}</mat-panel-title>
+            <mat-panel-description> </mat-panel-description>
+          </mat-expansion-panel-header>
+          <mat-selection-list
+            #shoes
+            [(ngModel)]="selectedOptions"
+            (ngModelChange)="onNgModelChange($event)"
+          >
+            <mat-list-option
+              *ngFor="let shoeSub of shoe.tests"
+              [value]="shoeSub"
+            >
+              {{ shoeSub.test_name }}
+            </mat-list-option>
+          </mat-selection-list>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+    <div class="col">
+      <div class="row">
+        <!-- <div class="col">Patient:</div>
+        <div class="col">
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Patent</mat-label>
+            <input
+              matInput
+              #patientName
+              (input)="matchPatient(patientName.value)"
+            />
+          </mat-form-field>
+        </div> -->
+        <div class="form-group col-md-3">
+          <label for="patient_id">Patient Id</label>
+          <input
+            #patient_id
+            (input)="matchPatient(patient_id.value, 'registration_no')"
+            type="text"
+            class="form-control"
+            id="patient_id"
+          />
+        </div>
+        <div class="form-group col-md-3">
+          <label for="phone">Phone</label>
+          <input
+            #phone
+            (input)="matchPatient(phone.value, 'mobile')"
+            type="text"
+            class="form-control"
+            id="phone"
+          />
+        </div>
+        <div class="form-group col-md-3">
+          <label for="Aadhar Number">Aadhar Number</label>
+          <input
+            #aadhar
+            (input)="matchPatient(aadhar.value, 'aadhar_card')"
+            type="text"
+            class="form-control"
+            id="Aadhar Number"
+          />
+        </div>
+        <div class="col">
+          <button class="btn btn-secondary" (click)="prescribeLab()">
+            SAVE AND PRINT
+          </button>
+        </div>
+      </div>
+      <div class="row">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Name</th>
+              <th scope="col">Contect Number</th>
+              <th scope="col">Select</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let patient of patientList; index as i">
+              <th scope="row">{{ i + 1 }}</th>
+              <td>{{ patient.first_name }}</td>
+              <td>{{ patient.mobile }}</td>
+              <td>
+                <input
+                  type="radio"
+                  [value]="i"
+                  [checked]="i == defaultSelected"
+                  (change)="patientSelect(i)"
+                />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

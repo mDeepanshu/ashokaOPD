@@ -1,0 +1,45 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="row headMenu">
+      <div class="col-7 offset-3">
+        <img src="../../assets/mainLogo.jpeg" alt="logotipo" class="logotipo" />
+        <p>
+          ASHOKA DIAGNOSTIC & DAY CARE CENTER <br />
+          MINAKSHI CHOWK,NEAR LIC OFFICE HOSHANGABAD<br />
+          07574-465344, 9425603636, 7999590383
+        </p>
+      </div>
+    </div>
+    <div class="row basicDetails">
+      <div class="col">Registration Id : {{ basicObj.registration_no }}</div>
+      <div class="col">RECEIPT No #{{ receiptNo }}</div>
+      <div class="col">Ref. By : {{ basicObj.consultingDoc }}</div>
+    </div>
+    <div class="row mt-2">
+      <div class="col offset-5"><u> INVESTIGATIONS</u></div>
+    </div>
+    <div class="row mt-1">
+      <div class="col-1">#</div>
+      <div class="col"><u> TEST NAME</u></div>
+      <div class="col"><u> Charge</u></div>
+    </div>
+    <div class="row" *ngFor="let option of patientList; index as i">
+      <div class="col-1">{{ i + 1 }}</div>
+      <div class="col">{{ option.test_name }}</div>
+      <div class="col">{{ option.price }}</div>
+    </div>
+    <div class="row total label">
+      <div class="row mt-2">
+        <div class="col-3 offset-8">
+          <p>Total : ₹ {{ basicObj.total }} /-</p>
+        </div>
+      </div>
+    </div>
+    <div class="row label signatureRow">
+      <div class="col-3 offset-7 signatureCol">
+        <p class="signature">Signature :</p>
+      </div>
+      <hr />
+    </div>
+  </div>
+</div>

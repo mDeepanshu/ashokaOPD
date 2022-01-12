@@ -1,0 +1,43 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col">
+      <form [formGroup]="NewDoctor" (ngSubmit)="onSubmit()">
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label for="name">Doctor :</label>
+            <input
+              type="text"
+              formControlName="name"
+              class="form-control"
+              id="name"
+            />
+          </div>
+          <div class="form-group col-md-4">
+            <label for="visiting_charge">Visiting Charge :</label>
+            <input
+              type="text"
+              formControlName="visiting_charge"
+              class="form-control"
+              id="visiting_charge"
+            />
+          </div>
+          <div class="form-group col-md-4">
+            <label for="contact">Contact Number :</label>
+            <input
+              type="number"
+              formControlName="contact"
+              class="form-control"
+              id="contact"
+            />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <button class="btn btn-secondary" type="submit">SAVE</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="col"></div>
+</div>

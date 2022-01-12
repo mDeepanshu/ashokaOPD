@@ -1,0 +1,122 @@
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+img {
+  margin: 0;
+} /* margin reset*/
+h1 {
+  font-size: 15pt;
+  font-weight: 700;
+  margin-bottom: 0.5cm;
+}
+h2 {
+  font-size: 12pt;
+  font-weight: 700;
+}
+p {
+  font-size: 9pt;
+}
+.total {
+  border-top: 1px solid black;
+  margin-top: 5px;
+}
+.items-group {
+  /* border-style: solid; */
+  /* border-color: black; */
+  /* border-width: 1pt 1pt 1pt 1pt; */
+  border-radius: 5pt;
+  padding: 3pt 3pt 3pt 3pt;
+  margin-top: 5px;
+  font-size: 9pt;
+}
+
+.logotipo {
+  width: 6cm;
+  height: 2cm;
+  margin: 0.5cm;
+}
+
+.label {
+  font-weight: 700;
+}
+
+.disclaimer,
+.address {
+  font-size: 11pt;
+}
+.contact {
+  line-height: 40%;
+  height: 2cm;
+}
+.signature-field {
+  padding-bottom: 24pt;
+  border-bottom: solid black 1pt;
+}
+.second {
+  line-height: 100%;
+  font-size: 10pt;
+}
+.black {
+  color: black;
+}
+.receipt_no {
+  font-size: 9pt;
+}
+/*
+.container {
+  display: grid;
+  grid: "numero numero"
+        "logo loja"
+        "clt-lbl clt"
+        "da-lbl da";
+  grid-row-gap: 1cm;
+}
+
+.label-group {
+  border-left: solid black 1pt;
+  border-top: solid black 1pt;
+  border-top-left-radius: 10pt;
+  padding: 9pt 0 0 9pt
+}
+
+.description-group {
+  border-top: solid black 1pt;
+  padding: 9pt 0 0 9pt
+}
+
+.numero {
+  grid-area: numero;
+}
+
+.loja {
+  grid-area: loja;
+}
+
+.logotipo {
+  grid-area: logo;
+}
+
+.cliente-label {
+  grid-area: clt-lbl;
+}
+
+.cliente {
+  grid-area: clt;
+}
+
+.detalhes-assistencia-label {
+  grid-area: da-lbl;
+}
+
+.detalhes-assistencia {
+  grid-area: da;
+}
+
+*/
+.container-fluid {
+  zoom: 1.2;
+}
