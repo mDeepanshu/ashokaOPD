@@ -11,7 +11,7 @@ export class AppComponent implements OnInit {
   login = false;
 
   constructor(private mainService: MainServiceService) {}
-  opdPrint = 'opd';
+  opdPrint = 'toLab';
   ngOnInit() {
     this.mainService.login.subscribe((val) => {
       this.login = val;

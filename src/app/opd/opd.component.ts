@@ -51,41 +51,18 @@ export class OpdComponent implements OnInit {
       this.mainService.countPatient(),
       this.mainService.receiptCount(),
     ]).then((data: any) => {
-      console.log(data);
       this.patientForm.patchValue({
         todayCount: data[0],
         registration_no: data[1],
         patient_id: this.patientId,
         receipt_no: data[2],
       });
-      console.log(this.patientForm.value);
       this.mainService.addPatient(this.patientForm.value).then((data: any) => {
         this.patientId = data.visits._id;
-        this._snackBar.open('Patient Saved', 'Close')._dismissAfter(10);
-
-        this.print();
+        this.mainService.printOpd.next(this.patientForm.value);
+        this.printPage('opd', 'NEW OPD SAVED');
       });
     });
-    // this.mainService.dailyCount().then((val) => {
-    //   this.patientForm.patchValue({
-    //     todayCount: val,
-    //   });
-    // });
-    // this.mainService.countPatient().then((data) => {
-    //   this.patientForm.patchValue({
-    //     registration_no: data,
-    //     patient_id: this.patientId,
-    //   });
-    //   this.mainService.receiptCount().then((data: any) => {
-    //     this.patientForm.patchValue({
-    //       receipt_no: data,
-    //     });
-    //     this.mainService.addPatient(this.patientForm.value).then(() => {
-    //       this._snackBar.open('Patient Saved', 'Close');
-    //       this.print();
-    //     });
-    //   });
-    // });
   }
   patientSelect(i: number) {
     this.defaultSelected = i;
@@ -124,15 +101,6 @@ export class OpdComponent implements OnInit {
       }
     });
   }
-  print() {
-    this.mainService.printOpd.next(this.patientForm.value);
-    setTimeout(() => {
-      this.mainService.opdPrint.next('opd');
-      setTimeout(() => {
-        window.print();
-      }, 10);
-    }, 0);
-  }
   matchPatient(val: string, type: string) {
     this.mainService.matchPatient(val, type).then((data: any) => {
       console.log(data);
@@ -144,51 +112,42 @@ export class OpdComponent implements OnInit {
     this.mainService.newVisit(obj).then(() => {});
   }
   admitPatient() {
-    console.log(this.patientId);
     if (this.patientId == '') {
-      console.log('inIf');
-
       this.newPromisePatient().then((id: any) => {
         this.mainService.getPatient(id, 'last_visit').then((forVisit: any) => {
-          console.log(forVisit);
           let obj = {
             visit_id: forVisit[0].visits[0]._id,
             receipt_no: this.patientForm.value.receipt_no,
             amount: this.patientForm.value.visiting_charge,
           };
           this.mainService.admitPatient(obj).then((data) => {
-            this._snackBar.open('Patient Admit Saved', 'Close');
-            this.mainService.opdPrint.next('admit');
-            setTimeout(() => {
-              window.print();
-            }, 10);
+            this.printPage('admit', 'New Admit Saved');
           });
         });
       });
     } else {
-      console.log(this.patientId);
       Promise.all([
         this.mainService.getPatient(this.patientId, 'last_visit'),
         this.mainService.receiptCount(),
       ]).then((arr: any) => {
-        console.log(arr[0][0]);
-
         let obj = {
           visit_id: arr[0][0].visits[0]._id,
           receipt_no: arr[1],
           amount: this.patientForm.value.visiting_charge,
         };
         this.mainService.admitPatient(obj).then((data) => {
-          this._snackBar.open('Patient Admit Saved', 'Close');
-          this.mainService.opdPrint.next('admit');
-          setTimeout(() => {
-            window.print();
-          }, 0);
+          this.printPage('admit', 'New Admit Saved');
         });
       });
     }
   }
-
+  printPage(type: string, msg: string) {
+    this._snackBar.open(msg, 'Close');
+    this.mainService.opdPrint.next(type);
+    setTimeout(() => {
+      window.print();
+    }, 5);
+  }
   newPromisePatient() {
     return new Promise((res, rej) => {
       Promise.all([
@@ -196,14 +155,12 @@ export class OpdComponent implements OnInit {
         this.mainService.countPatient(),
         this.mainService.receiptCount(),
       ]).then((data: any) => {
-        console.log(data);
         this.patientForm.patchValue({
           todayCount: data[0],
           registration_no: data[1],
           patient_id: this.patientId,
           receipt_no: data[2],
         });
-        console.log(this.patientForm.value);
         this.mainService
           .addPatient(this.patientForm.value)
           .then((data: any) => {

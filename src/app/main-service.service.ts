@@ -14,7 +14,7 @@ export class MainServiceService {
   localNotWorking: string = 'https://hospital-hoshangabad.herokuapp.com';
   login = new Subject<boolean>();
   navBarFor = 2;
-  printPharmacy = new Subject<any>();
+  ipdPrintData = new Subject<any>();
   printOpd = new Subject<any>();
   opdPrint = new Subject<string>();
   labPrintData = new Subject<any>();

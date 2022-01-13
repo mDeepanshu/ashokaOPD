@@ -18,6 +18,24 @@
     >
       <p style="font-size: 12pt">ADMIT SLIP</p>
     </div>
+
+    <div class="row no-gutters items-group" style="border-top: solid black 1px">
+      <div class="col-8 label">
+        <div class="row">
+          <p>
+            &nbsp;&nbsp; Patient Name : {{ basicObj.first_name }}
+            {{ basicObj.last_name }} {{ basicObj.relation }}
+            {{ basicObj.relative_name }}
+          </p>
+        </div>
+      </div>
+      <div class="col-2 label">
+        <p class="black">Age : {{ basicObj.age }}</p>
+      </div>
+      <div class="col-2 label">
+        <p class="black">Sex : {{ basicObj.sex }}</p>
+      </div>
+    </div>
   </div>
   <div class="row">
     <div class="col-3"></div>
